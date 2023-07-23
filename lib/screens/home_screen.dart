@@ -29,12 +29,33 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'All songs',
+          style: TextStyle(
+            fontSize: 22,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.pink.shade200,
+        elevation: 2,
+      ),
       body: SafeArea(
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             if (state is HomeLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 15),
+                      Text('Fetching your favourite songs...')
+                    ],
+                  ),
+                ),
               );
             }
 
