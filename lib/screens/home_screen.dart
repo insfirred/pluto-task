@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musixmatch_app/screens/track_details_screen.dart';
 
 import '../bloc/home/home_bloc.dart';
 import '../bloc/home/home_events.dart';
 import '../bloc/home/home_states.dart';
+import '../bloc/track_details/track_details_bloc.dart';
 import '../models/track.dart';
+import '../repositories/track_repository.dart';
+import 'track_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -41,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             return const Center(
-              child: Text('Error'),
+              child: Text('Error while fetching the data. Try again later.'),
             );
           },
         ),
@@ -77,6 +79,9 @@ class TrackItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TrackRepository trackRepository = TrackRepository(
+      trackId: track.id.toString(),
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: ListTile(
@@ -87,7 +92,9 @@ class TrackItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             CupertinoPageRoute(
-              builder: (context) => const TrackDetailsScreen(),
+              builder: (context) => BlocProvider(
+                  create: (context) => TrackDetailsBloc(trackRepository),
+                  child: TrackDetailsScreen(track.id.toString())),
             ),
           );
         },

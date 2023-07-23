@@ -1,15 +1,21 @@
+import 'package:musixmatch_app/models/lyrics.dart';
+
 import '../../models/track_data.dart';
 
-abstract class HomeState {}
+abstract class TrackDetailsState {}
 
-class TrackDetailsLoadingState extends HomeState {}
+class TrackDetailsLoadingState extends TrackDetailsState {}
 
-class TrackDetailsLoadedState extends HomeState {
+class TrackDetailsLoadedState extends TrackDetailsState {
   final TrackData trackData;
-  TrackDetailsLoadedState(this.trackData);
+  final Lyrics lyrics;
+  TrackDetailsLoadedState({
+    required this.trackData,
+    required this.lyrics,
+  });
 }
 
-class TrackDetailsErrorState extends HomeState {
+class TrackDetailsErrorState extends TrackDetailsState {
   final String errorMessage;
   TrackDetailsErrorState(this.errorMessage);
 }

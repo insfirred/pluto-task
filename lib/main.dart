@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeRepository homeRepository = HomeRepository();
-
     return BlocProvider(
       create: (context) => HomeBloc(homeRepository),
       child: const MaterialApp(

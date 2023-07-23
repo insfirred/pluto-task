@@ -1,3 +1,3 @@
-abstract class HomeEvent {}
+abstract class TrackDetailsEvent {}
 
-class FetchTrackDetailsEvent extends HomeEvent {}
+class FetchTrackDetailsEvent extends TrackDetailsEvent {}

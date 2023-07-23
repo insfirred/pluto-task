@@ -1,20 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musixmatch_app/bloc/home/home_events.dart';
-import 'package:musixmatch_app/bloc/home/home_states.dart';
-import 'package:musixmatch_app/repositories/home_repository.dart';
 
-class TrackDetailsBloc extends Bloc<HomeEvent, HomeState> {
-  final HomeRepository _homeRepository;
+import '../../repositories/track_repository.dart';
+import 'track_details_events.dart';
+import 'track_details_states.dart';
 
-  TrackDetailsBloc(this._homeRepository) : super(HomeLoadingState()) {
-    on<FetchTracksEvent>(
+class TrackDetailsBloc extends Bloc<TrackDetailsEvent, TrackDetailsState> {
+  final TrackRepository _trackRepository;
+
+  TrackDetailsBloc(this._trackRepository) : super(TrackDetailsLoadingState()) {
+    on<FetchTrackDetailsEvent>(
       (event, emit) async {
-        emit(HomeLoadingState());
+        emit(TrackDetailsLoadingState());
         try {
-          final allTracks = await _homeRepository.fetchAllTracks();
-          emit(HomeLoadedState(allTracks ?? []));
+          final trackDetails = await _trackRepository.fetchTrackInfo();
+          final lyrics = await _trackRepository.fetchLyrics();
+          emit(TrackDetailsLoadedState(
+            trackData: trackDetails!,
+            lyrics: lyrics!,
+          ));
         } catch (e) {
-          emit(HomeErrorState(e.toString()));
+          emit(TrackDetailsErrorState(e.toString()));
         }
       },
     );
