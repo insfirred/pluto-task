@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:musixmatch_app/api_service/api_service.dart';
-import 'package:musixmatch_app/models/track.dart';
 
+import '../api_service/api_service.dart';
 import '../constants/constants.dart';
+import '../models/track.dart';
 
 class HomeRepository {
   late final Dio dio;

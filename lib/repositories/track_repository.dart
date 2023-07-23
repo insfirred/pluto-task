@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:musixmatch_app/models/lyrics.dart';
 
 import '../api_service/api_service.dart';
 import '../constants/constants.dart';
+import '../models/lyrics.dart';
 import '../models/track_data.dart';
 
 class TrackRepository {

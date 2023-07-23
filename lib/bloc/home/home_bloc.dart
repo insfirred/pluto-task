@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musixmatch_app/bloc/home/home_events.dart';
-import 'package:musixmatch_app/bloc/home/home_states.dart';
-import 'package:musixmatch_app/repositories/home_repository.dart';
+
+import '../../repositories/home_repository.dart';
+import 'home_events.dart';
+import 'home_states.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeRepository _homeRepository;

@@ -1,5 +1,4 @@
-import 'package:musixmatch_app/models/lyrics.dart';
-
+import '../../models/lyrics.dart';
 import '../../models/track_data.dart';
 
 abstract class TrackDetailsState {}
