@@ -6,6 +6,7 @@ import '../bloc/home/home_bloc.dart';
 import '../bloc/home/home_events.dart';
 import '../bloc/home/home_states.dart';
 import '../bloc/track_details/track_details_bloc.dart';
+import '../local_database/sql_client.dart';
 import '../models/track.dart';
 import '../repositories/track_repository.dart';
 import 'track_details_screen.dart';
@@ -24,6 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<HomeBloc>(context).add(FetchTracksEvent());
+    () async {
+      final data = await SqlClient.getItems();
+      print(data.length);
+    }();
   }
 
   @override
